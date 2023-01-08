@@ -207,37 +207,18 @@ macd_df = calc_macd(data, 'Close', 12, 26, 9)
 # Plot the MACD and MACD histogram values
 ax3.plot(macd_df['MACD'], label='MACD', color='green')
 ax3.plot(macd_df['MACD signal'], label='MACD signal', color='red')
-#ax3.bar(macd_df.index, macd_df['MACD histogram'], label='MACD histogram', width=0.01, color='purple', edgecolor='black', alpha=.5)
+ax3.bar(macd_df.index, macd_df['MACD histogram'], label='MACD histogram', width=0.01, color='purple', edgecolor='black', alpha=.5)
 
-# Plot the bar chart
-bars = ax3.bar(range(len(macd_df.index)), macd_df['MACD histogram'])
-threshold = .01
+# # Plot the bar chart
+# bars = ax3.bar(range(len(macd_df.index)), macd_df['MACD histogram'])
+# threshold = .01
 
-# Set the color of each bar based on the threshold value
-for bar in bars:
-    if bar.get_height() > threshold:
-        bar.set_color('green')
-    else:
-        bar.set_color('red')
-
-# # Set the threshold value
-# threshold = 0
-
-# # Create two separate histograms, one for data above the threshold and one for data below the threshold
-# hist_above, bins_above = np.histogram(macd_df[macd_df['MACD histogram'] > threshold], bins=10, range=(threshold, .20))
-# hist_below, bins_below = np.histogram(macd_df[macd_df['MACD histogram'] <= threshold], bins=10, range=(-.20, threshold))
-
-# # Set the colors for the two histograms
-# color_above = 'green'
-# color_below = 'red'
-
-# # Plot the two histograms on the same axes
-# ax3.hist(bins_above[:-1], bins_above, weights=hist_above, color=color_above)
-# ax3.hist(bins_below[:-1], bins_below, weights=hist_below, color=color_below)
-
-# # Add a legend
-# ax3.legend(['Above threshold', 'Below threshold'])
-
+# # Set the color of each bar based on the threshold value
+# for bar in bars:
+#     if bar.get_height() > threshold:
+#         bar.set_color('green')
+#     else:
+#         bar.set_color('red')
 
 ax3.set_xlabel('Time')
 ax3.set_ylabel('MACD')
