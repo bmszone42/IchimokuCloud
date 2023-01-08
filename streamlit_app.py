@@ -187,7 +187,7 @@ ax2.xaxis.set_major_locator(MinuteLocator (interval=30))
 # Add a horizontal line at y=30 for Oversold
 ax2.axhline(y=30, color='g')
 #ax2.annotate('Test', (mdates.date2num(data.index[1]), rsi[1]), xytext=(15, 15), textcoords='offset points', arrowprops=dict(arrowstyle='-|>'))
-ax2.text(x=mdates.date2num(data.index[1]), y=20, s='BUY', horizontalalignment='right', verticalalignment='bottom', fontsize=8)
+ax2.text(x=mdates.date2num(data.index[1]), y=20, s='BUY', horizontalalignment='center', verticalalignment='center', fontsize=8)
 
 
 # Add a horizontal line at y=70 for Overbought
