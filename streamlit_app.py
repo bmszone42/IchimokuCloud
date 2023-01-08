@@ -10,6 +10,7 @@ import matplotlib.ticker as ticker
 import matplotlib.dates as mdates
 from matplotlib.dates import MinuteLocator, ConciseDateFormatter
 import matplotlib.gridspec as gridspec
+import numpy as np
 
 
 # Create a sidebar for user input
