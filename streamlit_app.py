@@ -185,11 +185,14 @@ ax2.xaxis.set_major_locator(MinuteLocator (interval=30))
 
 # Add a horizontal line at y=30 for Oversold
 ax2.axhline(y=30, color='g')
-ax2.text(x=mdates.date2num(data.index[20]), y=20, s='OVERSOLD', horizontalalignment='center', verticalalignment='center_baseline', fontsize=8)
 
+# Reference X axis date using mdates.date2num since x-axis are dates 
+ax2.text(x=mdates.date2num(data.index[20]), y=20, s='OVERSOLD', horizontalalignment='center', verticalalignment='center_baseline', fontsize=8)
 
 # Add a horizontal line at y=70 for Overbought
 ax2.axhline(y=70, color='r')
+
+# Reference X axis date using mdates.date2num since x-axis are dates 
 ax2.text(x=mdates.date2num(data.index[20]), y=80, s='OVERBOUGHT', horizontalalignment='center', verticalalignment='center_baseline', fontsize=8)
 
 
