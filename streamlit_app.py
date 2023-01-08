@@ -184,7 +184,7 @@ ax2.xaxis.set_major_locator(MinuteLocator (interval=30))
 #ax2.legend(fontsize=6)
 # Add a horizontal line at y=30 for Oversold
 ax2.axhline(y=30, color='g')
-ax2.text(x=0, y=30, s='Threshold', horizontalalignment='left', verticalalignment='bottom', fontsize=6)
+#ax2.text(x=0, y=30, s='Threshold', horizontalalignment='left', verticalalignment='bottom', fontsize=6)
 
 
 # Add a horizontal line at y=70 for Overbought
@@ -207,7 +207,7 @@ macd_df = calc_macd(data, 'Close', 12, 26, 9)
 # Plot the MACD and MACD histogram values
 ax3.plot(macd_df['MACD'], label='MACD', color='green')
 ax3.plot(macd_df['MACD signal'], label='MACD signal', color='red')
-ax3.bar(macd_df.index, macd_df['MACD histogram'], label='MACD histogram', width=0.01, color='purple', edgecolor='black', alpha=.5)
+ax3.bar(macd_df.index, macd_df['MACD histogram'], label='MACD histogram', width=0.02, color='purple', edgecolor='black', alpha=.5)
 
 # # Plot the bar chart
 # bars = ax3.bar(range(len(macd_df)), macd_df['MACD histogram'], label='MACD histogram', width=0.01, edgecolor='black', alpha=.5)
