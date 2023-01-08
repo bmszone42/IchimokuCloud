@@ -130,9 +130,6 @@ def calc_macd(df: pd.DataFrame, column: str, fast_period: int, slow_period: int,
 fig = plt.figure(figsize=(12, 18), dpi=200)
 #fig.autofmt_xdate()
 
-# displaying the title
-#plt.title('Ichimoku Cloud Indicator: Interval: {}, Period: {}, Symbol: {}'.format(interval, period, symbol))
-
 gs = gridspec.GridSpec(nrows=4, ncols=1, height_ratios=[3, 1, 1, 1])
 
 # Create the subplots using the grid specification
@@ -152,6 +149,9 @@ ax1.set_xlabel('Time')
 ax1.set_ylabel('Price')
 ax1.xaxis.set_major_locator(MinuteLocator (interval=30))
 ax1.set_xlim(data.index.min(), data.index.max())
+
+# displaying the title on main subplot
+ax1.title('Ichimoku Cloud Indicator: Interval: {}, Period: {}, Symbol: {}'.format(interval, period, symbol))
 
 # Get the tick labels
 tick_labels1 = ax1.get_xticklabels()
