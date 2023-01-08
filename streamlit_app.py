@@ -127,7 +127,7 @@ def calc_macd(df: pd.DataFrame, column: str, fast_period: int, slow_period: int,
     return macd_df
 
 
-fig = plt.figure(figsize=(10, 18))
+fig = plt.figure(figsize=(12, 16))
 gs = gridspec.GridSpec(nrows=4, ncols=1, height_ratios=[3, 1, 1, 1])
 
 # Create the subplots using the grid specification
