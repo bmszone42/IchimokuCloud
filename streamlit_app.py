@@ -207,7 +207,7 @@ macd_df = calc_macd(data, 'Close', 12, 26, 9)
 # Plot the MACD and MACD histogram values
 ax3.plot(macd_df['MACD'], label='MACD', color='green')
 ax3.plot(macd_df['MACD signal'], label='MACD signal', color='red')
-ax3.bar(macd_df.index, macd_df['MACD histogram'], label='MACD histogram', width=0.02, color='purple', edgecolor='black', alpha=.5)
+#ax3.bar(macd_df.index, macd_df['MACD histogram'], label='MACD histogram', width=0.02, color='purple', edgecolor='black', alpha=.5)
 
 # Plot the bar chart
 bars = ax3.bar(range(len(macd_df)), macd_df['MACD histogram'], label='MACD histogram', color='red', width=0.01, edgecolor='black', alpha=.5)
