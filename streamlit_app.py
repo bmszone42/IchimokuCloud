@@ -213,8 +213,8 @@ ax3.plot(macd_df['MACD signal'], label='MACD signal', color='red')
 threshold = 0
 
 # Create two separate histograms, one for data above the threshold and one for data below the threshold
-hist_above, bins_above = np.histogram(macd_df[macd_df['MACD histogram'] > threshold], bins=100, range=(threshold, .20))
-hist_below, bins_below = np.histogram(macd_df[macd_df['MACD histogram'] <= threshold], bins=100, range=(-.20, threshold))
+hist_above, bins_above = np.histogram(macd_df[macd_df['MACD histogram'] > threshold], bins=10, range=(threshold, .20))
+hist_below, bins_below = np.histogram(macd_df[macd_df['MACD histogram'] <= threshold], bins=10, range=(-.20, threshold))
 
 # Set the colors for the two histograms
 color_above = 'green'
