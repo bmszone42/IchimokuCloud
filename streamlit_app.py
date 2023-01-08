@@ -208,7 +208,7 @@ macd_df = calc_macd(data, 'Close', 12, 26, 9)
 # Plot the MACD and MACD histogram values
 ax3.plot(macd_df['MACD'], label='MACD', color='green')
 ax3.plot(macd_df['MACD signal'], label='MACD signal', color='red')
-bars = ax3.bar(macd_df.index, macd_df['MACD histogram'], label='MACD histogram', width=0.001, color='r', align= 'edge', edgecolor='black', alpha=.5)
+bars = ax3.bar(macd_df.index, macd_df['MACD histogram'], label='MACD histogram', width=0.0005, color='r', align= 'edge', edgecolor='black', alpha=.5)
 threshold = .0001
 
 # # Set the color of each bar based on the threshold value
