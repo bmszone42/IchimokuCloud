@@ -225,14 +225,14 @@ ax3.hist(bins_above[:-1], bins_above, weights=hist_above, color=color_above)
 ax3.hist(bins_below[:-1], bins_below, weights=hist_below, color=color_below)
 
 # Add a legend
-ax.legend(['Above threshold', 'Below threshold'])
+ax3.legend(['Above threshold', 'Below threshold'])
 
 
 ax3.set_xlabel('Time')
 ax3.set_ylabel('MACD')
 ax3.xaxis.set_major_locator(MinuteLocator (interval=30))
 
-ax3.legend(fontsize=6, loc='upper left')
+#ax3.legend(fontsize=6, loc='upper left')
 
 # Get the tick labels
 tick_labels3 = ax3.get_xticklabels()
