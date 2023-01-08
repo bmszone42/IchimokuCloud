@@ -58,7 +58,7 @@ for index, row in data.iterrows():
     elif row["Close"] < row["Open"] and row["chikou_span"] < row["Close"]:
         short_positions.append(index)
 
-#data = data.drop(columns=['Dividends', 'Stock Splits'])
+data = data.drop(columns=['Dividends', 'Stock Splits'])
 
 
 def calc_rsi(df: pd.DataFrame, column: str, period: int) -> pd.Series:
