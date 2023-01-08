@@ -183,17 +183,15 @@ ax2.set_xlim(data.index.min(), data.index.max())
 ax2.set_xlabel('Time')
 ax2.xaxis.set_major_locator(MinuteLocator (interval=30))
 
-#ax2.legend(fontsize=6)
 # Add a horizontal line at y=30 for Oversold
 ax2.axhline(y=30, color='g')
-#ax2.annotate('Test', (mdates.date2num(data.index[1]), rsi[1]), xytext=(15, 15), textcoords='offset points', arrowprops=dict(arrowstyle='-|>'))
-ax2.text(x=mdates.date2num(data.index[10]), y=20, s='BUY', horizontalalignment='center', verticalalignment='center_baseline', fontsize=8)
+ax2.text(x=mdates.date2num(data.index[10]), y=20, s='OVERSOLD', horizontalalignment='center', verticalalignment='center_baseline', fontsize=8)
 
 
 # Add a horizontal line at y=70 for Overbought
 ax2.axhline(y=70, color='r')
-ax2.text(x=mdates.date2num(data.index[1]), y=80, s='SELL', horizontalalignment='right', verticalalignment='top', fontsize=8)
-#ax2.text(x=0, y=70, s='Overbought', horizontalalignment='left', verticalalignment='bottom', fontsize=10, fontweight='bold')
+ax2.text(x=mdates.date2num(data.index[1]), y=80, s='OVERBOUGHT', horizontalalignment='right', verticalalignment='top', fontsize=8)
+
 
 # Get the tick labels
 tick_labels2 = ax2.get_xticklabels()
