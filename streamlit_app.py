@@ -176,6 +176,7 @@ rsi = calc_rsi(data, 'Close', 14)
 ax2.plot(data.index, rsi)
 ax2.set_ylabel('RSI')
 
+ax2.set_ylim(0, 100)
 ax2.set_xlim(data.index.min(), data.index.max())
 
 ax2.set_xlabel('Time')
