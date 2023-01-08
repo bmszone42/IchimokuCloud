@@ -228,6 +228,7 @@ ax3.xaxis.set_major_locator(MinuteLocator (interval=30))
 
 # Get the tick labels
 tick_labels3 = ax3.get_xticklabels()
+tick_labels = list(range(0, data.index.max(), 10))
 
 # Set the font size and style of the tick labels
 for label in tick_labels3:
