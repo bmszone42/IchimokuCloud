@@ -208,7 +208,23 @@ macd_df = calc_macd(data, 'Close', 12, 26, 9)
 # Plot the MACD and MACD histogram values
 ax3.plot(macd_df['MACD'], label='MACD', color='green')
 ax3.plot(macd_df['MACD signal'], label='MACD signal', color='red')
-ax3.bar(macd_df.index[::10], macd_df['MACD histogram'][::10], label='MACD histogram', width=0.02, color='blue', edgecolor='black', alpha=.5)
+#ax3.bar(macd_df.index[::10], macd_df['MACD histogram'][::10], label='MACD histogram', width=0.02, color='blue', edgecolor='black', alpha=.5)
+
+align = 'edge'
+bar_width = 0.02
+x = np.arange(len(macd_df))
+
+# Calculate the bar width
+bar_width = bar_width * 5
+
+# Plot the MACD histogram using the calculated bar width
+ax3.bar(x, macd_df['MACD histogram'], width=bar_width, align=align, label='MACD histogram', color='purple', edgecolor='black', alpha=.5)
+
+# Set the x-axis tick labels
+ax3.set_xticks(x)
+
+# Set the x-axis tick labels to be the time values
+ax3.set_xticklabels(macd_df.index)
 
 # # Plot the bar chart
 # bars = ax3.bar(range(len(macd_df.index[::10])), macd_df['MACD histogram'][::10], label='MACD histogram', color='red', width=0.01, edgecolor='black', alpha=.5)
