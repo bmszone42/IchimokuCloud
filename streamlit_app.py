@@ -23,7 +23,7 @@ interval = st.sidebar.text_input("Interval", "1m")
 period = st.sidebar.text_input("Period", "1d")
 
 # Add a text input for the symbol
-symbol = st.sidebar.text_input("Symbol", "SPY230106C00386000")
+symbol = st.sidebar.text_input("Symbol", "SPY230109C00386000")
 
 st.title('Ichimoku Cloud Indicator')
 st.markdown("Interval: **{}**, Period: **{}**, Symbol: **{}**".format(interval, period, symbol))
