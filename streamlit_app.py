@@ -127,7 +127,7 @@ def calc_macd(df: pd.DataFrame, column: str, fast_period: int, slow_period: int,
     return macd_df
 
 
-fig = plt.figure(figsize=(8, 16))
+fig = plt.figure(figsize=(12, 18))
 gs = gridspec.GridSpec(nrows=4, ncols=1, height_ratios=[3, 1, 1, 1])
 
 # Create the subplots using the grid specification
@@ -185,7 +185,7 @@ ax2.xaxis.set_major_locator(MinuteLocator (interval=30))
 #ax2.legend(fontsize=6)
 # Add a horizontal line at y=30 for Oversold
 ax2.axhline(y=30, color='g')
-ax2.text(x=0, y=30, s='Threshold', horizontalalignment='left', verticalalignment='bottom', fontsize=6)
+#ax2.text(x=0, y=30, s='Threshold', horizontalalignment='left', verticalalignment='bottom', fontsize=6)
 
 
 # Add a horizontal line at y=70 for Overbought
