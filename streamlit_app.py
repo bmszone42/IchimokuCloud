@@ -128,6 +128,7 @@ def calc_macd(df: pd.DataFrame, column: str, fast_period: int, slow_period: int,
 
 
 fig = plt.figure(figsize=(12, 18), dpi=200)
+#fig.autofmt_xdate()
 gs = gridspec.GridSpec(nrows=4, ncols=1, height_ratios=[3, 1, 1, 1])
 
 # Create the subplots using the grid specification
@@ -185,6 +186,8 @@ ax2.xaxis.set_major_locator(MinuteLocator (interval=30))
 #ax2.legend(fontsize=6)
 # Add a horizontal line at y=30 for Oversold
 ax2.axhline(y=30, color='g')
+ax2.annotate('Test', (mdates.date2num(x[1]), y[1]), xytext=(15, 15), 
+            textcoords='offset points', arrowprops=dict(arrowstyle='-|>'))
 #ax2.text(x=0, y=30, s='Threshold', horizontalalignment='right', verticalalignment='bottom', fontsize=6)
 
 
