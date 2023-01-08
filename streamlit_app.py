@@ -237,7 +237,7 @@ for label in tick_labels3:
     label.set_rotation(45)
     label.set_horizontalalignment('right')
     
-ax3.set_xlim(data.index.min(), data.index.max())
+#ax3.set_xlim(data.index.min(), data.index.max())
 
 # Plot the volume data on the new subplot
 ax4.plot(data.index, data['Volume'], color='k', linestyle='-', linewidth=1)
