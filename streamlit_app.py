@@ -181,6 +181,11 @@ ax2.set_xlabel('Time')
 ax2.xaxis.set_major_locator(MinuteLocator (interval=30))
 
 #ax2.legend(fontsize=6)
+# Add a horizontal line at y=30 for Oversold
+ax2.axhline(y=30, color='r')
+
+# Add a horizontal line at y=70 for Overbought
+ax2.axhline(y=70, color='g')
 
 # Get the tick labels
 tick_labels2 = ax2.get_xticklabels()
