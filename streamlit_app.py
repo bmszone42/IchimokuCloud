@@ -183,7 +183,7 @@ ax2.xaxis.set_major_locator(MinuteLocator (interval=30))
 #ax2.legend(fontsize=6)
 # Add a horizontal line at y=30 for Oversold
 ax2.axhline(y=30, color='g')
-ax2.text(x=0, y=30, s='Oversold', horizontalalignment='left', verticalalignment='bottom', fontsize=6)
+ax2.text(x=0, y=30, s='Threshold', horizontalalignment='left', verticalalignment='bottom', fontsize=6)
 
 
 # Add a horizontal line at y=70 for Overbought
