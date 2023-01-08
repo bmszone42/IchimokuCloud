@@ -128,7 +128,7 @@ def calc_macd(df: pd.DataFrame, column: str, fast_period: int, slow_period: int,
 
 
 fig = plt.figure(figsize=(12, 18), dpi=200)
-fig.autofmt_xdate()
+#fig.autofmt_xdate()
 
 # displaying the title
 plt.title('Ichimoku Cloud Indicator: Interval: {}, Period: {}, Symbol: {}'.format(interval, period, symbol))
