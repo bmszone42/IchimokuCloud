@@ -211,7 +211,7 @@ ax3.plot(macd_df['MACD signal'], label='MACD signal', color='red')
 
 # Plot the bar chart
 bars = ax3.bar(range(len(macd_df.index)), macd_df['MACD histogram'])
-threshold = 0
+threshold = .01
 
 # Set the color of each bar based on the threshold value
 for bar in bars:
