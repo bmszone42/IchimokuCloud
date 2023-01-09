@@ -23,4 +23,14 @@ def get_candlestick_chart(price_data, ma_type, ma_length, plot_days):
         )
     )
     
-    
+   # Sidebar controls -----------------------------------------------------------
+ticker = st.sidebar.text_input(
+    label='Stock ticker',
+    value='TSLA',    
+)
+
+st.sidebar.button(
+    label='Update data',
+    on_click=get_data,
+    kwargs={'ticker': ticker},
+) 
