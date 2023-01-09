@@ -1,5 +1,10 @@
-Add method to get the call/put directly without having to enter long format (e.g. take in ticker, date call/put then grab this format SPY230109C00386000)
-Add candlesticks to main plot to code with a toggle on/off
+1. Add method to get the call/put directly without having to enter long format (e.g. take in ticker, date call/put then grab this format SPY230109C00386000)
+2. Add candlesticks to main plot to code with a toggle on/off
+
+st.subheader('Price Chart 📈')    
+st.plotly_chart(
+    get_candlestick_chart(price_data, ma_type, ma_length, plot_days)
+)
 
 def get_candlestick_chart(price_data, ma_type, ma_length, plot_days):
     
