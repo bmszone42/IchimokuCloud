@@ -1,0 +1,26 @@
+Add method to get the call/put directly without having to enter long format (e.g. take in ticker, date call/put then grab this format SPY230109C00386000)
+Add candlesticks to main plot to code with a toggle on/off
+
+def get_candlestick_chart(price_data, ma_type, ma_length, plot_days):
+    
+    if ma_type == 'Simple':
+        price_data['ma'] = price_data['Close'].rolling(int(ma_length)).mean()
+    else:
+        price_data['ma'] = price_data['Close'].ewm(int(ma_length)).mean()
+    
+    price_data = price_data[-int(plot_days):]
+    
+    fig = go.Figure()
+    
+    fig.add_trace(
+        go.Candlestick(
+            x=price_data['Date'],
+            open=price_data['Open'],
+            high=price_data['High'],
+            low=price_data['Low'],
+            close=price_data['Close'],
+            showlegend=False,
+        )
+    )
+    
+    
