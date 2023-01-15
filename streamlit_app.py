@@ -74,7 +74,7 @@ st.write(d)
 st.write(option_type)
 st.write(strike)
 
-options = ticker_label+d+option_type+'00'+strike+'000'
+options = ticker_label+d+option_type+'00'+str(strike)+'000'
 st.write('The option is ' + options)
 
 
