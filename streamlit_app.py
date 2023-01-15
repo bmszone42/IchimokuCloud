@@ -309,7 +309,7 @@ def get_candlestick_chart(data):
     
     fig5.add_trace(
         go.Candlestick(
-            x=data['Date'],
+            x=data['time'],
             open=data['Open'],
             high=data['High'],
             low=data['Low'],
@@ -320,7 +320,7 @@ def get_candlestick_chart(data):
     
     fig5.add_trace(
         go.Line(
-            x=data['Date'],
+            x=data['time'],
             y=data['Close'],
         )    
     )
@@ -338,6 +338,7 @@ def get_candlestick_chart(data):
     )
     
     return fig5
+   
 st.plotly_chart(get_candlestick_chart(data))
 
 st.write("Pricing Data from Option " + options)
