@@ -51,7 +51,7 @@ period = st.sidebar.text_input("Period", "1d")
 st.sidebar.button(
     label='Update data',
     on_click=get_data,
-    kwargs={'Symbol': symbol},
+    kwargs={'symbol': symbol},
 )
 
 # Check if we have the stock data, if not, download it
