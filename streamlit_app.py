@@ -25,11 +25,44 @@ period = st.sidebar.text_input("Period", "1d")
 # Add a text input for the symbol
 symbol = st.sidebar.text_input("Symbol", "SPY230109C00386000")
 
+def get_data(ticker: str):
+    
+    try:
+        price_data = yf.download(ticker)
+        
+        # Save them in the data directory to access them again later without
+        # redownloading the files
+        price_data.to_csv(f'data/{ticker}_prices.csv')
+    except Exception as e:
+        st.write(e)
+    
+    return (
+        price_data.reset_index(),
+    )
+    
+# Sidebar controls -----------------------------------------------------------
+ticker = st.sidebar.text_input(
+    label='Stock ticker',
+    value='SPY',    
+)
+
+st.sidebar.button(
+    label='Update data',
+    on_click=get_data,
+    kwargs={'ticker': ticker},
+)
+
+# Check if we have the stock data, if not, download it
+if os.path.isfile(f'data/{ticker}_prices.csv'):
+    price_data = pd.read_csv(f'data/{ticker}_prices.csv')
+else:
+    price_data = get_data(ticker)
+
 st.title('Ichimoku Cloud Indicator')
 st.markdown("Interval: **{}**, Period: **{}**, Symbol: **{}**".format(interval, period, symbol))
 
-# Connect to the TradeStation API and retrieve the price data for the specified symbol and interval
-ticker = yf.Ticker(symbol)
+# Connect to the API and retrieve the price data for the specified symbol and interval
+#ticker = yf.Ticker(symbol)
 data = ticker.history(period=period, interval=interval)
 
 # Convert the index to a column and keep only the hour and minute
