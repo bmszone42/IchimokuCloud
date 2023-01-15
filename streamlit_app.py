@@ -49,9 +49,9 @@ period = st.sidebar.text_input("Period", "1d")
 #ticker = st.sidebar.text_input("Symbol", "SPY230109C00386000")
 
 #select call or put
-option = st.radio("Select Option Type: ", ('Call', 'Put'))
+option = st.sidebar.radio("Select Option Type: ", ('Call', 'Put'))
 
-strike = st.siderbar.number_input('Select the option strike', "397")
+strike = st.siderbar.number_input('Select the option strike', ("397"))
 
 option_date = st.date_input ('Enter the strike date', datetime.date(2023,1,17))
 
