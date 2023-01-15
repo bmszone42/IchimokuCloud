@@ -338,7 +338,7 @@ def get_candlestick_chart(data):
     )
     
     return fig5
-   
+st.write(data)   
 st.plotly_chart(get_candlestick_chart(data))
 
 st.write("Pricing Data from Option " + options)
