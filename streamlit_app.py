@@ -19,14 +19,14 @@ def get_data(options: str):
         ticker = yf.Ticker(options)
         data = ticker.history(period=period, interval=interval)
         
-        # Save them in the data directory to access them again later without
-        # redownloading the files
-        if not os.path.exists('prices'):
-            os.mkdir('prices')
-        data.to_csv(f'prices/{options}_prices.csv')
-        #data.to_csv(f'prices/{options}_prices.csv')
-    except Exception as e:
-        st.write(e)
+#         # Save them in the data directory to access them again later without
+#         # redownloading the files
+#         if not os.path.exists('prices'):
+#             os.mkdir('prices')
+#         data.to_csv(f'prices/{options}_prices.csv')
+#         #data.to_csv(f'prices/{options}_prices.csv')
+#     except Exception as e:
+#         st.write(e)
     
     return (
         data.reset_index()
@@ -39,10 +39,10 @@ def get_data(options: str):
 st.sidebar.header("Inputs")
 
 # Add a text input for the symbol
-symbol = st.sidebar.text_input(
-    label='Stock ticker',
-    value='SPY230118C00396000',    
-)
+# symbol = st.sidebar.text_input(
+#     label='Stock ticker',
+#     value='SPY230118C00396000',    
+# )
 
 # Add a text input for the symbol
 ticker_label = st.sidebar.text_input(
@@ -56,9 +56,7 @@ interval = st.sidebar.text_input("Interval", "1m")
 # Add a text input for the period
 period = st.sidebar.text_input("Period", "1d")
 
-#ticker = st.sidebar.text_input("Symbol", "SPY230109C00386000")
-
-#select call or put
+# Select call or put
 option = st.sidebar.radio("Select Option Type: ", ('Call', 'Put'))
 
 if option == 'Call':
@@ -66,22 +64,19 @@ if option == 'Call':
 else:
     option_type = 'P'
 
+# Add a slider input for the strike price
 strike = st.sidebar.slider("Select the option strike", 300,450,396)
 
+# Add a  input for the option date
 option_date = st.sidebar.date_input("Enter the strike date")
 d = option_date.strftime("%y%m%d")
 
-st.write('The option is ')
-st.write(ticker_label)
-st.write(str(option_date))
-st.write(d)
-st.write(option_type)
-st.write(strike)
-
+# Concatenate the option label
 options = str(ticker_label+d+option_type+'00'+str(strike)+'000')
 st.write('The option is ' + options)
 st.sidebar.subheader('The option is ' + options)
 
+# Add a button to update the price
 st.sidebar.button(
     label='Update data',
     on_click=get_data,
@@ -90,10 +85,10 @@ st.sidebar.button(
 
 
 # Check if we have the stock data, if not, download it
-if (f'prices/{options}_prices.csv'):
-    data = pd.read_csv(f'prices/{options}_prices.csv')
-else:
-    data = get_data(options)
+# if (f'prices/{options}_prices.csv'):
+#     data = pd.read_csv(f'prices/{options}_prices.csv')
+# else:
+#     data = get_data(options)
 
 #@st.cache
 st.write(data)
