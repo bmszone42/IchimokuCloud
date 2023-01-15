@@ -65,7 +65,7 @@ else:
 strike = st.sidebar.slider("Select the option strike", 300,450,396)
 
 option_date = st.sidebar.date_input("Enter the strike date")
-d = datetime.date(option_date, "%Y-%m-%d").strftime("%y%m%d")
+d = option_date.strftime("%y%m%d")
 
 st.write('The option is ')
 st.write(ticker_label)
