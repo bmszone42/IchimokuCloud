@@ -53,7 +53,7 @@ option = st.sidebar.radio("Select Option Type: ", ('Call', 'Put'))
 
 strike = st.sidebar.slider("Select the option strike", 300,450,396)
 
-option_date = st.sidebar.date_input("Enter the strike date", datetime.date(2023,1,17))
+option_date = st.sidebar.date_input("Enter the strike date")
 
 st.write('The option is ' + symbol + option_date + option + '00' + strike + '000')
 
