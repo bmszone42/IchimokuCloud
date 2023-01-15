@@ -13,7 +13,8 @@ import matplotlib.gridspec as gridspec
 import numpy as np
 import os
 
-# def get_data(options: str):
+def get_data(ticker):
+    return
     
 #     try:
 #         ticker = yf.Ticker(options)
@@ -78,10 +79,10 @@ ticker = yf.Ticker(options)
 # Add a button to update the price
 st.sidebar.button(
     label='Update data',
-    on_click=(data = ticker.history(period=period, interval=interval))
-#     on_click=get_data(options),
-    #kwargs={'options': options},
+    on_click=get_data,
+    kwargs={'ticker': ticker},
 )
+
 
 # Check if we have the stock data, if not, download it
 # if (f'prices/{options}_prices.csv'):
