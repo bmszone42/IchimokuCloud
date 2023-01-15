@@ -13,35 +13,11 @@ import matplotlib.gridspec as gridspec
 import numpy as np
 import os
 
-def get_data(ticker):
-    return
-    
-#     try:
-#         ticker = yf.Ticker(options)
-#         data = ticker.history(period=period, interval=interval)
-        
-#         # Save them in the data directory to access them again later without
-#         # redownloading the files
-#         if not os.path.exists('prices'):
-#             os.mkdir('prices')
-#         data.to_csv(f'prices/{options}_prices.csv')
-# #         #data.to_csv(f'prices/{options}_prices.csv')
-#     except Exception as e:
-#         st.write(e)
-    
-#     return (data.reset_index())
-    
-    
+ 
 # Sidebar controls -----------------------------------------------------------
 
 # Create a sidebar for user input
 st.sidebar.header("Inputs")
-
-# Add a text input for the symbol
-# symbol = st.sidebar.text_input(
-#     label='Stock ticker',
-#     value='SPY230118C00396000',    
-# )
 
 # Add a text input for the symbol
 ticker_label = st.sidebar.text_input(
@@ -80,28 +56,9 @@ if result:
     ticker = yf.Ticker(options)
     data = ticker.history(period=period, interval=interval)
 
-# Add a button to update the price
-# st.sidebar.button(
-#     label='Update data',
-#     on_click=get_data,
-#     kwargs={'ticker': ticker},
-# )
-
-
-# Check if we have the stock data, if not, download it
-# if (f'prices/{options}_prices.csv'):
-#     data = pd.read_csv(f'prices/{options}_prices.csv')
-# else:
-#     data = get_data(options)
-
 #@st.cache
-#st.write(data)
 st.title('Ichimoku Cloud Indicator')
 st.markdown("Interval: **{}**, Period: **{}**, Symbol: **{}**".format(interval, period, options))
-
-# Connect to the API and retrieve the price data for the specified symbol and interval
-#ticker = yf.Ticker(symbol)
-#data = ticker.history(period=period, interval=interval)
 
 # Convert the index to a column and keep only the hour and minute
 data['time'] = pd.to_datetime(data.index, format='%H:%M')
