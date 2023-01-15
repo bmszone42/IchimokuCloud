@@ -70,6 +70,7 @@ d = datetime.date(option_date, "%Y-%m-%d").strftime("%y%m%d")
 st.write('The option is ')
 st.write(ticker_label)
 st.write(str(option_date))
+st.write(d)
 st.write(option_type)
 st.write(strike)
 
