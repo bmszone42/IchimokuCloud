@@ -318,11 +318,11 @@ def get_candlestick_chart(data):
         )
     )
     
-    fig5.add_trace(
-        go.Line(
-            x=data.index,
-            y=data['Close'],
-        )    
+#     fig5.add_trace(
+#         go.Line(
+#             x=data.index,
+#             y=data['Close'],
+#         )    
     )
     
     fig5.update_xaxes(
@@ -338,7 +338,7 @@ def get_candlestick_chart(data):
     )
     
     return fig5
-st.write(data)   
+#st.write(data)   
 st.plotly_chart(get_candlestick_chart(data))
 
 st.write("Pricing Data from Option " + options)
