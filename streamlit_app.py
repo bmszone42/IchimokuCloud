@@ -15,20 +15,20 @@ import os
 
 def get_data(options: str):
     
-    #try:
+    try:
         ticker = yf.Ticker(options)
         data = ticker.history(period=period, interval=interval)
         
-#         # Save them in the data directory to access them again later without
-#         # redownloading the files
-#         if not os.path.exists('prices'):
-#             os.mkdir('prices')
-#         data.to_csv(f'prices/{options}_prices.csv')
+        # Save them in the data directory to access them again later without
+        # redownloading the files
+        if not os.path.exists('prices'):
+            os.mkdir('prices')
+        data.to_csv(f'prices/{options}_prices.csv')
 #         #data.to_csv(f'prices/{options}_prices.csv')
-#     except Exception as e:
-#         st.write(e)
+    except Exception as e:
+        st.write(e)
     
-    #return (data.reset_index())
+    return (data.reset_index())
     
     
 # Sidebar controls -----------------------------------------------------------
@@ -87,7 +87,7 @@ st.sidebar.button(
 # else:
 #     data = get_data(options)
 
-#@st.cache
+@st.cache
 #st.write(data)
 st.title('Ichimoku Cloud Indicator')
 st.markdown("Interval: **{}**, Period: **{}**, Symbol: **{}**".format(interval, period, options))
