@@ -74,14 +74,18 @@ d = option_date.strftime("%y%m%d")
 options = str(ticker_label+d+option_type+'00'+str(strike)+'000')
 st.write('The option is ' + options)
 st.sidebar.subheader('The option is ' + options)
-ticker = yf.Ticker(options)
+
+result = st.sidebar.button('Get some data!')
+if result:
+    ticker = yf.Ticker(options)
+    data = ticker.history(period=period, interval=interval)
 
 # Add a button to update the price
-st.sidebar.button(
-    label='Update data',
-    on_click=get_data,
-    kwargs={'ticker': ticker},
-)
+# st.sidebar.button(
+#     label='Update data',
+#     on_click=get_data,
+#     kwargs={'ticker': ticker},
+# )
 
 
 # Check if we have the stock data, if not, download it
