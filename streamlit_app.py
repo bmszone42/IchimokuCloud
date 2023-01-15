@@ -12,33 +12,6 @@ from matplotlib.dates import MinuteLocator, ConciseDateFormatter
 import matplotlib.gridspec as gridspec
 import numpy as np
 
-
-# Create a sidebar for user input
-st.sidebar.header("Inputs")
-
-# Add a text input for the interval
-interval = st.sidebar.text_input("Interval", "1m")
-
-# Add a text input for the period
-period = st.sidebar.text_input("Period", "1d")
-
-# Add a text input for the symbol
-ticker = st.sidebar.text_input("Symbol", "SPY230109C00386000")
-
-st.sidebar.button(
-    label='Update data',
-    on_click=get_data,
-    kwargs={'ticker': ticker},
-)
-
-# Check if we have the stock data, if not, download it
-if (f'prices/{ticker}_prices.csv'):
-    data = pd.read_csv(f'prices/{ticker}_prices.csv')
-else:
-    data = get_data(ticker)
-
-@st.cache
-
 def get_data(ticker: str):
     
     try:
@@ -55,11 +28,37 @@ def get_data(ticker: str):
     )
     
 # Sidebar controls -----------------------------------------------------------
-# ticker = st.sidebar.text_input(
-#     label='Stock ticker',
-#     value='SPY',    
-# )
+ticker = st.sidebar.text_input(
+    label='Stock ticker',
+    value='SPY230118C00396000',    
+)
 
+
+# Create a sidebar for user input
+st.sidebar.header("Inputs")
+
+# Add a text input for the interval
+interval = st.sidebar.text_input("Interval", "1m")
+
+# Add a text input for the period
+period = st.sidebar.text_input("Period", "1d")
+
+# Add a text input for the symbol
+#ticker = st.sidebar.text_input("Symbol", "SPY230109C00386000")
+
+st.sidebar.button(
+    label='Update data',
+    on_click=get_data,
+    kwargs={'ticker': ticker},
+)
+
+# Check if we have the stock data, if not, download it
+if (f'prices/{ticker}_prices.csv'):
+    data = pd.read_csv(f'prices/{ticker}_prices.csv')
+else:
+    data = get_data(ticker)
+
+#@st.cache
 
 st.title('Ichimoku Cloud Indicator')
 st.markdown("Interval: **{}**, Period: **{}**, Symbol: **{}**".format(interval, period, ticker))
