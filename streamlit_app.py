@@ -78,7 +78,7 @@ ticker = yf.Ticker(options)
 # Add a button to update the price
 st.sidebar.button(
     label='Update data',
-    on_click, data = ticker.history(period=period, interval=interval)
+    on_click=(data = ticker.history(period=period, interval=interval))
 #     on_click=get_data(options),
     #kwargs={'options': options},
 )
