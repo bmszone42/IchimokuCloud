@@ -11,6 +11,7 @@ import matplotlib.dates as mdates
 from matplotlib.dates import MinuteLocator, ConciseDateFormatter
 import matplotlib.gridspec as gridspec
 import numpy as np
+import os
 
 def get_data(options: str):
     
@@ -20,7 +21,10 @@ def get_data(options: str):
         
         # Save them in the data directory to access them again later without
         # redownloading the files
+        if not os.path.exists('prices'):
+            os.mkdir('prices')
         data.to_csv(f'prices/{options}_prices.csv')
+        #data.to_csv(f'prices/{options}_prices.csv')
     except Exception as e:
         st.write(e)
     
