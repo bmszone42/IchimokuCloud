@@ -57,7 +57,7 @@ period = st.sidebar.text_input("Period", "1d")
 #select call or put
 option = st.sidebar.radio("Select Option Type: ", ('Call', 'Put'))
 
-if option == 'Call:
+if option == 'Call':
     option_type = 'C'
 else:
     option_type = 'P'
