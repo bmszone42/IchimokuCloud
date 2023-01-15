@@ -40,6 +40,12 @@ symbol = st.sidebar.text_input(
     value='SPY230118C00396000',    
 )
 
+# Add a text input for the symbol
+ticker_label = st.sidebar.text_input(
+    label='Stock ticker',
+    value='SPY',    
+)
+
 # Add a text input for the interval
 interval = st.sidebar.text_input("Interval", "1m")
 
@@ -56,7 +62,7 @@ strike = st.sidebar.slider("Select the option strike", 300,450,396)
 option_date = st.sidebar.date_input("Enter the strike date")
 
 st.write('The option is ')
-st.write(symbol)
+st.write(ticker_label)
 st.write(str(option_date))
 st.write(option)
 st.write(strike)
