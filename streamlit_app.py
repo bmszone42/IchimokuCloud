@@ -70,7 +70,7 @@ option_date = st.sidebar.date_input("Enter the strike date")
 d = option_date.strftime("%y%m%d")
 
 # Concatenate the option label
-options = str(ticker_label+d+option_type+'00'+strike+'000')
+options = str(ticker_label+d+option_type+'00'+str(strike)+'000')
 st.write('The option is ' + options)
 st.sidebar.subheader('The option is ' + options)
 
@@ -80,7 +80,6 @@ st.sidebar.button(
     on_click=get_data,
     kwargs={'options': options},
 )
-
 
 # Check if we have the stock data, if not, download it
 # if (f'prices/{options}_prices.csv'):
