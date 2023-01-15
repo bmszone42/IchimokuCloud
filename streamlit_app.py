@@ -25,6 +25,7 @@ period = st.sidebar.text_input("Period", "1d")
 # Add a text input for the symbol
 ticker = st.sidebar.text_input("Symbol", "SPY230109C00386000")
 
+@st.cache
 def get_data(ticker: str):
     
     try:
