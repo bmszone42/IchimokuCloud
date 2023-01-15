@@ -323,7 +323,7 @@ def get_candlestick_chart(data):
 #             x=data.index,
 #             y=data['Close'],
 #         )    
-    )
+#     )
     
     fig5.update_xaxes(
         rangebreaks = [{'bounds': ['sat', 'mon']}],
