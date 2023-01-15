@@ -57,16 +57,23 @@ period = st.sidebar.text_input("Period", "1d")
 #select call or put
 option = st.sidebar.radio("Select Option Type: ", ('Call', 'Put'))
 
+if option == 'Call:
+    option_type = 'C'
+else:
+    option_type = 'P'
+
 strike = st.sidebar.slider("Select the option strike", 300,450,396)
 
 option_date = st.sidebar.date_input("Enter the strike date")
-option_date = datetime.datetime.strptime(option_date, "%Y-%m-%d").strftime("%y%m%d")
+option_date = datetime.date.strptime(option_date, "%Y-%m-%d").strftime("%y%m%d")
 
 st.write('The option is ')
 st.write(ticker_label)
 st.write(str(option_date))
-st.write(option)
+st.write(option_type)
 st.write(strike)
+
+
 
 st.sidebar.button(
     label='Update data',
