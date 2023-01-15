@@ -77,8 +77,8 @@ st.sidebar.subheader('The option is ' + options)
 # Add a button to update the price
 st.sidebar.button(
     label='Update data',
-    on_click=get_data,
-    kwargs={'options': options},
+    on_click=get_data(options),
+    #kwargs={'options': options},
 )
 
 # Check if we have the stock data, if not, download it
