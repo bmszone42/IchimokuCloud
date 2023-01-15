@@ -12,27 +12,12 @@ from matplotlib.dates import MinuteLocator, ConciseDateFormatter
 import matplotlib.gridspec as gridspec
 import numpy as np
 
-def get_data(ticker: str):
-    
-    try:
-        data = ticker.history(period=period, interval=interval)
-        
-        # Save them in the data directory to access them again later without
-        # redownloading the files
-        data.to_csv(f'prices/{ticker}_prices.csv')
-    except Exception as e:
-        st.write(e)
-    
-    return (
-        data.reset_index(),
-    )
-    
+
 # Sidebar controls -----------------------------------------------------------
 ticker = st.sidebar.text_input(
     label='Stock ticker',
     value='SPY230118C00396000',    
 )
-
 
 # Create a sidebar for user input
 st.sidebar.header("Inputs")
@@ -95,7 +80,22 @@ for index, row in data.iterrows():
 
 data = data.drop(columns=['Dividends', 'Stock Splits'])
 
-
+def get_data(ticker: str):
+    
+    try:
+        data = ticker.history(period=period, interval=interval)
+        
+        # Save them in the data directory to access them again later without
+        # redownloading the files
+        data.to_csv(f'prices/{ticker}_prices.csv')
+    except Exception as e:
+        st.write(e)
+    
+    return (
+        data.reset_index(),
+    )
+    
+    
 def calc_rsi(df: pd.DataFrame, column: str, period: int) -> pd.Series:
     """Calculate the relative strength index (RSI) for a column in a Pandas DataFrame.
     
