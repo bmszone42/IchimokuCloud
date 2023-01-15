@@ -54,7 +54,7 @@ st.sidebar.button(
 )
 
 # Check if we have the stock data, if not, download it
-if os.path.isfile(f'data/{ticker}_prices.csv'):
+if (f'data/{ticker}_prices.csv'):
     price_data = pd.read_csv(f'data/{ticker}_prices.csv')
 else:
     price_data = get_data(ticker)
