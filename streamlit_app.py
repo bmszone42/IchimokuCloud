@@ -20,7 +20,7 @@ def get_data(symbol: str):
         
         # Save them in the data directory to access them again later without
         # redownloading the files
-        data.to_csv(f'prices/{ticker}_prices.csv')
+        data.to_csv(f'prices/{symbol}_prices.csv')
     except Exception as e:
         st.write(e)
     
@@ -56,9 +56,9 @@ st.sidebar.button(
 
 # Check if we have the stock data, if not, download it
 if (f'prices/{ticker}_prices.csv'):
-    data = pd.read_csv(f'prices/{ticker}_prices.csv')
+    data = pd.read_csv(f'prices/{symbol}_prices.csv')
 else:
-    data = get_data(ticker)
+    data = get_data(symbol)
 
 #@st.cache
 
