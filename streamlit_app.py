@@ -23,7 +23,7 @@ interval = st.sidebar.text_input("Interval", "1m")
 period = st.sidebar.text_input("Period", "1d")
 
 # Add a text input for the symbol
-symbol = st.sidebar.text_input("Symbol", "SPY230109C00386000")
+ticker = st.sidebar.text_input("Symbol", "SPY230109C00386000")
 
 def get_data(ticker: str):
     
@@ -41,10 +41,10 @@ def get_data(ticker: str):
     )
     
 # Sidebar controls -----------------------------------------------------------
-ticker = st.sidebar.text_input(
-    label='Stock ticker',
-    value='SPY',    
-)
+# ticker = st.sidebar.text_input(
+#     label='Stock ticker',
+#     value='SPY',    
+# )
 
 st.sidebar.button(
     label='Update data',
