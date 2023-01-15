@@ -13,22 +13,22 @@ import matplotlib.gridspec as gridspec
 import numpy as np
 import os
 
-def get_data(options: str):
+# def get_data(options: str):
     
-    try:
-        ticker = yf.Ticker(options)
-        data = ticker.history(period=period, interval=interval)
+#     try:
+#         ticker = yf.Ticker(options)
+#         data = ticker.history(period=period, interval=interval)
         
-        # Save them in the data directory to access them again later without
-        # redownloading the files
-        if not os.path.exists('prices'):
-            os.mkdir('prices')
-        data.to_csv(f'prices/{options}_prices.csv')
-#         #data.to_csv(f'prices/{options}_prices.csv')
-    except Exception as e:
-        st.write(e)
+#         # Save them in the data directory to access them again later without
+#         # redownloading the files
+#         if not os.path.exists('prices'):
+#             os.mkdir('prices')
+#         data.to_csv(f'prices/{options}_prices.csv')
+# #         #data.to_csv(f'prices/{options}_prices.csv')
+#     except Exception as e:
+#         st.write(e)
     
-    return (data.reset_index())
+#     return (data.reset_index())
     
     
 # Sidebar controls -----------------------------------------------------------
@@ -73,11 +73,13 @@ d = option_date.strftime("%y%m%d")
 options = str(ticker_label+d+option_type+'00'+str(strike)+'000')
 st.write('The option is ' + options)
 st.sidebar.subheader('The option is ' + options)
+ticker = yf.Ticker(options)
 
 # Add a button to update the price
 st.sidebar.button(
     label='Update data',
-    on_click=get_data(options),
+    on_click, data = ticker.history(period=period, interval=interval)
+#     on_click=get_data(options),
     #kwargs={'options': options},
 )
 
