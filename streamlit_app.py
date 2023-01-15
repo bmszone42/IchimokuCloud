@@ -309,7 +309,7 @@ def get_candlestick_chart(data):
     
     fig5.add_trace(
         go.Candlestick(
-            x=data['time'],
+            x=data.index,
             open=data['Open'],
             high=data['High'],
             low=data['Low'],
