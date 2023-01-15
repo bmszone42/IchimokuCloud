@@ -222,7 +222,7 @@ ax1.xaxis.set_major_locator(MinuteLocator (interval=30))
 ax1.set_xlim(data.index.min(), data.index.max())
 
 # displaying the title on main subplot
-ax1.set_title('Ichimoku Cloud Indicator: Interval: {}, Period: {}, Symbol: {}'.format(interval, period, symbol))
+ax1.set_title('Ichimoku Cloud Indicator: Interval: {}, Period: {}, Symbol: {}'.format(interval, period, options))
 
 # Get the tick labels
 tick_labels1 = ax1.get_xticklabels()
