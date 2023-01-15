@@ -86,15 +86,15 @@ st.sidebar.button(
 
 
 # Check if we have the stock data, if not, download it
-if (f'prices/{ticker}_prices.csv'):
-    data = pd.read_csv(f'prices/{symbol}_prices.csv')
+if (f'prices/{options}_prices.csv'):
+    data = pd.read_csv(f'prices/{options}_prices.csv')
 else:
-    data = get_data(symbol)
+    data = get_data(options)
 
 #@st.cache
 st.write(data)
 st.title('Ichimoku Cloud Indicator')
-st.markdown("Interval: **{}**, Period: **{}**, Symbol: **{}**".format(interval, period, symbol))
+st.markdown("Interval: **{}**, Period: **{}**, Symbol: **{}**".format(interval, period, options))
 
 # Connect to the API and retrieve the price data for the specified symbol and interval
 #ticker = yf.Ticker(symbol)
