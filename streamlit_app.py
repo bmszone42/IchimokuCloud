@@ -55,7 +55,11 @@ strike = st.sidebar.slider("Select the option strike", 300,450,396)
 
 option_date = st.sidebar.date_input("Enter the strike date")
 
-st.write('The option is ' + symbol + str(option_date) + option + '00' + strike + '000')
+st.write('The option is ')
+st.write(symbol)
+st.write(str(option_date))
+st.write(option)
+st.write(strike)
 
 st.sidebar.button(
     label='Update data',
