@@ -25,6 +25,19 @@ period = st.sidebar.text_input("Period", "1d")
 # Add a text input for the symbol
 ticker = st.sidebar.text_input("Symbol", "SPY230109C00386000")
 
+st.sidebar.button(
+    label='Update data',
+    on_click=get_data,
+    kwargs={'ticker': ticker},
+)
+
+# Check if we have the stock data, if not, download it
+if (f'prices/{ticker}_prices.csv'):
+    data = pd.read_csv(f'prices/{ticker}_prices.csv')
+else:
+    data = get_data(ticker)
+
+@st.cache
 
 def get_data(ticker: str):
     
@@ -47,19 +60,7 @@ def get_data(ticker: str):
 #     value='SPY',    
 # )
 
-st.sidebar.button(
-    label='Update data',
-    on_click=get_data,
-    kwargs={'ticker': ticker},
-)
 
-# Check if we have the stock data, if not, download it
-if (f'prices/{ticker}_prices.csv'):
-    data = pd.read_csv(f'prices/{ticker}_prices.csv')
-else:
-    data = get_data(ticker)
-
-@st.cache
 st.title('Ichimoku Cloud Indicator')
 st.markdown("Interval: **{}**, Period: **{}**, Symbol: **{}**".format(interval, period, ticker))
 
