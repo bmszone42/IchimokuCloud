@@ -29,7 +29,7 @@ def get_data(options: str):
         st.write(e)
     
     return (
-        data
+        data.reset_index()
     )
     
     
