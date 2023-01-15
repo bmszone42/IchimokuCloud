@@ -15,7 +15,7 @@ import os
 
 def get_data(options: str):
     
-    try:
+    #try:
         ticker = yf.Ticker(options)
         data = ticker.history(period=period, interval=interval)
         
@@ -28,9 +28,7 @@ def get_data(options: str):
 #     except Exception as e:
 #         st.write(e)
     
-    return (
-        data.reset_index()
-    )
+    #return (data.reset_index())
     
     
 # Sidebar controls -----------------------------------------------------------
@@ -72,7 +70,7 @@ option_date = st.sidebar.date_input("Enter the strike date")
 d = option_date.strftime("%y%m%d")
 
 # Concatenate the option label
-options = str(ticker_label+d+option_type+'00'+str(strike)+'000')
+options = str(ticker_label+d+option_type+'00'+strike+'000')
 st.write('The option is ' + options)
 st.sidebar.subheader('The option is ' + options)
 
