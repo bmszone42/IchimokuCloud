@@ -320,7 +320,7 @@ def get_candlestick_chart(data):
     
     fig5.add_trace(
         go.Line(
-            x=data['time'],
+            x=data.index,
             y=data['Close'],
         )    
     )
