@@ -12,10 +12,10 @@ from matplotlib.dates import MinuteLocator, ConciseDateFormatter
 import matplotlib.gridspec as gridspec
 import numpy as np
 
-def get_data(ticker: str):
+def get_data(symbol: str):
     
     try:
-        ticker = yf.Ticker(ticker)
+        ticker = yf.Ticker(symbol)
         data = ticker.history(period=period, interval=interval)
         
         # Save them in the data directory to access them again later without
@@ -35,7 +35,7 @@ def get_data(ticker: str):
 st.sidebar.header("Inputs")
 
 # Add a text input for the symbol
-ticker = st.sidebar.text_input(
+symbol = st.sidebar.text_input(
     label='Stock ticker',
     value='SPY230118C00396000',    
 )
@@ -51,7 +51,7 @@ period = st.sidebar.text_input("Period", "1d")
 st.sidebar.button(
     label='Update data',
     on_click=get_data,
-    kwargs={'ticker': ticker},
+    kwargs={'Symbol': symbol},
 )
 
 # Check if we have the stock data, if not, download it
@@ -63,7 +63,7 @@ else:
 #@st.cache
 
 st.title('Ichimoku Cloud Indicator')
-st.markdown("Interval: **{}**, Period: **{}**, Symbol: **{}**".format(interval, period, ticker))
+st.markdown("Interval: **{}**, Period: **{}**, Symbol: **{}**".format(interval, period, symbol))
 
 # Connect to the API and retrieve the price data for the specified symbol and interval
 #ticker = yf.Ticker(symbol)
