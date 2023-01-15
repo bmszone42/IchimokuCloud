@@ -60,7 +60,7 @@ else:
     price_data = get_data(ticker)
 
 st.title('Ichimoku Cloud Indicator')
-st.markdown("Interval: **{}**, Period: **{}**, Symbol: **{}**".format(interval, period, symbol))
+st.markdown("Interval: **{}**, Period: **{}**, Symbol: **{}**".format(interval, period, ticker))
 
 # Connect to the API and retrieve the price data for the specified symbol and interval
 #ticker = yf.Ticker(symbol)
