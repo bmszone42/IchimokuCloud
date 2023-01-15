@@ -48,11 +48,21 @@ period = st.sidebar.text_input("Period", "1d")
 
 #ticker = st.sidebar.text_input("Symbol", "SPY230109C00386000")
 
+#select call or put
+option = st.radio("Select Option Type: ", ('Call', 'Put'))
+
+strike = st.siderbar.number_input('Select the option strike', "397")
+
+option_date = st.date_input ('Enter the strike date', datetime.date(2023,1,17))
+
+st.write('The option is ' symbol + option_date + option + '00' + strike + '000'
+
 st.sidebar.button(
     label='Update data',
     on_click=get_data,
     kwargs={'symbol': symbol},
 )
+
 
 # Check if we have the stock data, if not, download it
 if (f'prices/{ticker}_prices.csv'):
