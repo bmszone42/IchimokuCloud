@@ -29,16 +29,16 @@ ticker = st.sidebar.text_input("Symbol", "SPY230109C00386000")
 def get_data(ticker: str):
     
     try:
-        price_data = yf.download(ticker)
+        data = ticker.history(period=period, interval=interval)
         
         # Save them in the data directory to access them again later without
         # redownloading the files
-        price_data.to_csv(f'data/{ticker}_prices.csv')
+        data.to_csv(f'data/{ticker}_prices.csv')
     except Exception as e:
         st.write(e)
     
     return (
-        price_data.reset_index(),
+        data.reset_index(),
     )
     
 # Sidebar controls -----------------------------------------------------------
@@ -55,16 +55,16 @@ st.sidebar.button(
 
 # Check if we have the stock data, if not, download it
 if (f'data/{ticker}_prices.csv'):
-    price_data = pd.read_csv(f'data/{ticker}_prices.csv')
+    data = pd.read_csv(f'data/{ticker}_prices.csv')
 else:
-    price_data = get_data(ticker)
+    data = get_data(ticker)
 
 st.title('Ichimoku Cloud Indicator')
 st.markdown("Interval: **{}**, Period: **{}**, Symbol: **{}**".format(interval, period, ticker))
 
 # Connect to the API and retrieve the price data for the specified symbol and interval
 #ticker = yf.Ticker(symbol)
-data = ticker.history(period=period, interval=interval)
+#data = ticker.history(period=period, interval=interval)
 
 # Convert the index to a column and keep only the hour and minute
 data['time'] = pd.to_datetime(data.index, format='%H:%M')
