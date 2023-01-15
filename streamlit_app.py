@@ -61,7 +61,7 @@ else:
     data = get_data(symbol)
 
 #@st.cache
-
+st.write(data)
 st.title('Ichimoku Cloud Indicator')
 st.markdown("Interval: **{}**, Period: **{}**, Symbol: **{}**".format(interval, period, symbol))
 
