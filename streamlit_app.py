@@ -12,15 +12,15 @@ from matplotlib.dates import MinuteLocator, ConciseDateFormatter
 import matplotlib.gridspec as gridspec
 import numpy as np
 
-def get_data(symbol: str):
+def get_data(options: str):
     
     try:
-        ticker = yf.Ticker(symbol)
+        ticker = yf.Ticker(options)
         data = ticker.history(period=period, interval=interval)
         
         # Save them in the data directory to access them again later without
         # redownloading the files
-        data.to_csv(f'prices/{symbol}_prices.csv')
+        data.to_csv(f'prices/{options}_prices.csv')
     except Exception as e:
         st.write(e)
     
