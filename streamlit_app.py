@@ -88,7 +88,7 @@ st.sidebar.button(
 #     data = get_data(options)
 
 #@st.cache
-st.write(data)
+#st.write(data)
 st.title('Ichimoku Cloud Indicator')
 st.markdown("Interval: **{}**, Period: **{}**, Symbol: **{}**".format(interval, period, options))
 
