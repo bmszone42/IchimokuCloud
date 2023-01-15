@@ -81,7 +81,7 @@ st.sidebar.subheader('The option is ' + options)
 st.sidebar.button(
     label='Update data',
     on_click=get_data,
-    kwargs={'symbol': symbol},
+    kwargs={'options': options},
 )
 
 
