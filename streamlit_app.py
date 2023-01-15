@@ -299,10 +299,47 @@ mask = data['Volume'] > 1000
 
 # Shade the region of the subplot where the mask is True
 ax4.fill_between(data.index, data['Volume'], where=mask, alpha=0.25, color='purple')
-
 #plt.show()
 
 st.pyplot(fig)
+
+def get_candlestick_chart(data):
+    
+    fig5 = go.Figure()
+    
+    fig5.add_trace(
+        go.Candlestick(
+            x=data['Date'],
+            open=data['Open'],
+            high=data['High'],
+            low=data['Low'],
+            close=data['Close'],
+            showlegend=False,
+        )
+    )
+    
+    fig5.add_trace(
+        go.Line(
+            x=data['Date'],
+            y=data['Close'],
+        )    
+    )
+    
+    fig5.update_xaxes(
+        rangebreaks = [{'bounds': ['sat', 'mon']}],
+        rangeslider_visible = False,
+    )
+    
+    fig5.update_layout(
+        legend = {'x': 0, 'y': -0.05, 'orientation': 'h'},
+        margin = {'l': 50, 'r': 50, 'b': 50, 't': 25},
+        width = 800,
+        height = 800,
+    )
+    
+    return fig5
+st.plotly_chart(get_candlestick_chart(data))
+
 st.write("Pricing Data from Option " + options)
 data
 st.write("RSI Data from Option " + options)
