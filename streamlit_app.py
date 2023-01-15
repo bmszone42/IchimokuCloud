@@ -25,7 +25,7 @@ def get_data(symbol: str):
         st.write(e)
     
     return (
-        data.reset_index(),
+        data.reset_index()
     )
     
     
