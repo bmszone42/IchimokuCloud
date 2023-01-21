@@ -359,8 +359,8 @@ if result:
         file_path = st.file_uploader("Choose a location to save the file", type="png")
         if file_path:
             #file_name = st.text_input("Enter file name:", file_name)
-           plt.savefig(file_path + '/' + file_name)
-           st.success("Data saved successfully!")
+            plt.savefig(file_path + '/' + file_name)
+            st.success("Data saved successfully!")
          else:
             st.warning("No file path selected, figure not saved.")
     st.pyplot(fig)
