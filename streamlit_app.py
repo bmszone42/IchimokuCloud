@@ -357,7 +357,7 @@ if result:
     if savefigure:
         file_name = options + ".png"
         #file_path = st.file_uploader("Choose a location to save the file", type="png")
-        filepath = 'https://github.com/bmszone42/IchimokuCloud/edit/0.0.1-IchimokuCloud/optiondata'
+        filepath = ('https://github.com/bmszone42/IchimokuCloud/edit/0.0.1-IchimokuCloud/optiondata', type='png')
         
         if file_path:
         #file_name = st.text_input("Enter file name:", file_name)
