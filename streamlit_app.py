@@ -153,6 +153,7 @@ st.write("The option is " + options)
 st.sidebar.subheader("The option is " + options)
 candlestick= st.sidebar.checkbox("Show Candlestick Chart")
 datatables = st.sidebar.checkbox("Show Pricing, RSI and MACD Tables")
+savefigure= st.sidebar.checkbox("Save data as PNG file")        
 result = st.sidebar.button("Get some data!")
 
 if result:
@@ -358,7 +359,12 @@ if result:
     # Shade the region of the subplot where the mask is True
     ax4.fill_between(data.index, data['Volume'], where=mask, alpha=0.25, color='purple')
     # plt.show()
-
+    if savefigure:
+        file_name = options + ".png"
+        file_path = st.file_uploader("Choose a location to save the file", type="png", default=file_name)
+        if file_path:
+            plt.savefig(file_path)
+            st.success("Data saved successfully!")
     st.pyplot(fig)
 
 if candlestick:
