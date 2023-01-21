@@ -356,10 +356,10 @@ if result:
     # plt.show()
     if savefigure:
         file_name = options + ".png"
-        file_path = st.file_uploader("Choose a location to save the file", type="png")
+        file_path = st.file_chooser("Choose a location to save the file", type="png")
         if file_path:
-            file_name = st.text_input("Enter file name:", file_name)
-            plt.savefig(file_path + '/' + file_name)
+            #file_name = st.text_input("Enter file name:", file_name)
+            plt.savefig(file_path)
             st.success("Data saved successfully!")
         else:
             st.warning("No file path selected, figure not saved.")
