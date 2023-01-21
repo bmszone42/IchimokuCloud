@@ -49,23 +49,9 @@ options = str(ticker_label + d + option_type + "00" + str(strike) + "000")
 st.write("The option is " + options)
 st.sidebar.subheader("The option is " + options)
 candlestick= st.sidebar.checkbox("Show Candlestick Chart")
-result = st.sidebar.button("Get some data!")
 datatables = st.sidebar.checkbox("Show Pricing, RSI and MACD Tables")
+result = st.sidebar.button("Get some data!")
 
-if result:
-    ticker = yf.Ticker(options)
-    data = ticker.history(period=period, interval=interval)
-    #candlestick = st.sidebar.checkbox("View Candlestick Chart")
-    #datatables = st.sidebar.checkbox("View Data Tables")
-    if candlestick:
-        st.plotly_chart(get_candlestick_chart(data))
-    if datatables:
-        st.write("Pricing Data from Option " + options)
-        st.write(data)
-        st.write("RSI Data from Option " + options)
-        st.write(rsi)
-        st.write("MACD Data from Option " + options)
-        st.write(macd_df)
 # @st.cache
 st.title("Ichimoku Cloud Indicator")
 st.markdown(
@@ -367,3 +353,17 @@ def get_candlestick_chart(data):
 
     return fig5
 
+if result:
+    ticker = yf.Ticker(options)
+    data = ticker.history(period=period, interval=interval)
+    #candlestick = st.sidebar.checkbox("View Candlestick Chart")
+    #datatables = st.sidebar.checkbox("View Data Tables")
+    if candlestick:
+        st.plotly_chart(get_candlestick_chart(data))
+    if datatables:
+        st.write("Pricing Data from Option " + options)
+        st.write(data)
+        st.write("RSI Data from Option " + options)
+        st.write(rsi)
+        st.write("MACD Data from Option " + options)
+        st.write(macd_df)
