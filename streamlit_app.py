@@ -53,6 +53,16 @@ result = st.sidebar.button("Get some data!")
 if result:
     ticker = yf.Ticker(options)
     data = ticker.history(period=period, interval=interval)
+    if st.sidebar.checkbox("Show Candlestick Chart"):
+        st.plotly_chart(get_candlestick_chart(data))
+    
+    if st.sidebar.checkbox("Show Pricing, RSI and MACD Tables"):
+        st.write("Pricing Data from Option " + options)
+        data
+        st.write("RSI Data from Option " + options)
+        rsi
+        st.write("MACD Data from Option " + options)
+        macd_df
 
 # @st.cache
 st.title("Ichimoku Cloud Indicator")
@@ -317,10 +327,6 @@ mask = data['Volume'] > 1000
 ax4.fill_between(data.index, data['Volume'], where=mask, alpha=0.25, color='purple')
 # plt.show()
 
-
-import streamlit as st
-import plotly.graph_objs as go
-
 st.pyplot(fig)
 
 def get_candlestick_chart(data):
@@ -358,13 +364,4 @@ def get_candlestick_chart(data):
     )
 
     return fig5
-if st.sidebar.checkbox("Show Candlestick Chart"):
-    st.plotly_chart(get_candlestick_chart(data))
-    
-if st.sidebar.checkbox("Show Pricing, RSI and MACD Tables"):
-    st.write("Pricing Data from Option " + options)
-    data
-    st.write("RSI Data from Option " + options)
-    rsi
-    st.write("MACD Data from Option " + options)
-    macd_df
+
