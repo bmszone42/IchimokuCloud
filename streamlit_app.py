@@ -358,12 +358,13 @@ def get_candlestick_chart(data):
     )
 
     return fig5
-
-st.plotly_chart(get_candlestick_chart(data))
-
-st.write("Pricing Data from Option " + options)
-data
-st.write("RSI Data from Option " + options)
-rsi
-st.write("MACD Data from Option " + options)
-macd_df
+if st.sidebar.checkbox("Show Candlestick Chart"):
+    st.plotly_chart(get_candlestick_chart(data))
+    
+if st.sidebar.checkbox("Show Pricing, RSI and MACD Tables"):
+    st.write("Pricing Data from Option " + options)
+    data
+    st.write("RSI Data from Option " + options)
+    rsi
+    st.write("MACD Data from Option " + options)
+    macd_df
