@@ -153,14 +153,12 @@ st.write("The option is " + options)
 st.sidebar.subheader("The option is " + options)
 candlestick= st.sidebar.checkbox("Show Candlestick Chart")
 datatables = st.sidebar.checkbox("Show Pricing, RSI and MACD Tables")
-savefigure= st.sidebar.checkbox("Save data as PNG file")        
+savefigure= st.sidebar.checkbox("Save Image as PNG file")        
 result = st.sidebar.button("Get some data!")
 
 if result:
     ticker = yf.Ticker(options)
     data = ticker.history(period=period, interval=interval)
-    #candlestick = st.sidebar.checkbox("View Candlestick Chart")
-    #datatables = st.sidebar.checkbox("View Data Tables")
     # @st.cache
     st.title("Ichimoku Cloud Indicator")
     st.markdown(
@@ -196,9 +194,6 @@ if result:
             short_positions.append(index)
 
     data = data.drop(columns=['Dividends', 'Stock Splits'])
-
-
-
 
     fig = plt.figure(figsize=(12, 18), dpi=200)
     # fig.autofmt_xdate()
@@ -362,20 +357,20 @@ if result:
     if savefigure:
         file_name = options + ".png"
         st.empty()
-        file_path = st.file_uploader("Choose a location to save the file", type="png", key=file_name)
-        if file_path:
-            plt.savefig(file_path)
-            st.success("Data saved successfully!")
+        file_path = st.file_uploader("Choose a location to save the file", type="png")
+    if file_path:
+        file_name = st.text_input("Use current filename?", file_name)
+        plt.savefig(file_path + '/' + file_name)
+        st.success("Data saved successfully!")
     st.pyplot(fig)
-
-if candlestick:
-    st.plotly_chart(get_candlestick_chart(data))
-if datatables:
-    st.write("Pricing Data from Option " + options)
-    st.write(data)
-    st.write("RSI Data from Option " + options)
-    st.write(rsi)
-    st.write("MACD Data from Option " + options)
-    st.write(macd_df)
+    if candlestick:
+        st.plotly_chart(get_candlestick_chart(data))
+    if datatables:
+        st.write("Pricing Data from Option " + options)
+        st.write(data)
+        st.write("RSI Data from Option " + options)
+        st.write(rsi)
+        st.write("MACD Data from Option " + options)
+        st.write(macd_df)
 
 
