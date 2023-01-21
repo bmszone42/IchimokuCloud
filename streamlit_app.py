@@ -169,6 +169,41 @@ def calc_macd(df: pd.DataFrame, column: str, fast_period: int, slow_period: int,
 
     return macd_df
 
+def get_candlestick_chart(data):
+
+    fig5 = go.Figure()
+
+    fig5.add_trace(
+        go.Candlestick(
+            x=data.index,
+            open=data['Open'],
+            high=data['High'],
+            low=data['Low'],
+            close=data['Close'],
+            showlegend=False,
+        )
+    )
+
+    #     fig5.add_trace(
+    #         go.Line(
+    #             x=data.index,
+    #             y=data['Close'],
+    #         )    
+    #     )
+
+    fig5.update_xaxes(
+        rangebreaks = [{'bounds': ['sat', 'mon']}],
+        rangeslider_visible = False,
+    )
+
+    fig5.update_layout(
+        legend = {'x': 0, 'y': -0.05, 'orientation': 'h'},
+        margin = {'l': 50, 'r': 50, 'b': 50, 't': 25},
+        width = 800,
+        height = 800,
+    )
+
+    return fig5
 
 fig = plt.figure(figsize=(12, 18), dpi=200)
 # fig.autofmt_xdate()
@@ -332,40 +367,6 @@ ax4.fill_between(data.index, data['Volume'], where=mask, alpha=0.25, color='purp
 
 st.pyplot(fig)
 
-def get_candlestick_chart(data):
 
-    fig5 = go.Figure()
-
-    fig5.add_trace(
-        go.Candlestick(
-            x=data.index,
-            open=data['Open'],
-            high=data['High'],
-            low=data['Low'],
-            close=data['Close'],
-            showlegend=False,
-        )
-    )
-
-    #     fig5.add_trace(
-    #         go.Line(
-    #             x=data.index,
-    #             y=data['Close'],
-    #         )    
-    #     )
-
-    fig5.update_xaxes(
-        rangebreaks = [{'bounds': ['sat', 'mon']}],
-        rangeslider_visible = False,
-    )
-
-    fig5.update_layout(
-        legend = {'x': 0, 'y': -0.05, 'orientation': 'h'},
-        margin = {'l': 50, 'r': 50, 'b': 50, 't': 25},
-        width = 800,
-        height = 800,
-    )
-
-    return fig5
 
 
