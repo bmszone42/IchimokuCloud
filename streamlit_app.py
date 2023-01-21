@@ -358,7 +358,7 @@ if result:
         file_name = options + ".png"
         file_path = st.file_uploader("Choose a location to save the file", type="png")
         if file_path:
-            if os.path.exists(file_path)
+            if os.path.exists(file_path):
             #file_name = st.text_input("Enter file name:", file_name)
             plt.savefig(file_path + '/' + file_name)
             st.success("Data saved successfully!")
