@@ -355,13 +355,13 @@ if result:
     ax4.fill_between(data.index, data['Volume'], where=mask, alpha=0.25, color='purple')
     # plt.show()
     if savefigure:
-        file_name = options + ".png"
-        file_path = st.file_uploader("Choose a location to save the file", type="png")
+    file_name = options + ".png"
+    file_path = st.file_uploader("Choose a location to save the file", type="png")
         if file_path:
-            #file_name = st.text_input("Enter file name:", file_name)
+        #file_name = st.text_input("Enter file name:", file_name)
             plt.savefig(file_path + '/' + file_name)
             st.success("Data saved successfully!")
-         else:
+        else:
             st.warning("No file path selected, figure not saved.")
     st.pyplot(fig)
     if candlestick:
