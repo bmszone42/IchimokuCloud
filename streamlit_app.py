@@ -356,13 +356,16 @@ if result:
     # plt.show()
     if savefigure:
         file_name = options + ".png"
-        file_path = st.file_chooser("Choose a location to save the file", type="png")
+        file_path = st.file_uploader("Choose a location to save the file", type="png")
         if file_path:
+            if os.path.exists(file_path)
             #file_name = st.text_input("Enter file name:", file_name)
             plt.savefig(file_path + '/' + file_name)
             st.success("Data saved successfully!")
         else:
             st.warning("No file path selected, figure not saved.")
+    else:
+        st.warning("No file path selected, figure not saved.")
     st.pyplot(fig)
     if candlestick:
         st.plotly_chart(get_candlestick_chart(data))
