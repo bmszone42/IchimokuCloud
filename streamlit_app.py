@@ -49,6 +49,73 @@ def get_candlestick_chart(data):
 
     return fig5
 
+    
+def calc_rsi(df: pd.DataFrame, column: str, period: int) -> pd.Series:
+    """Calculate the relative strength index (RSI) for a column in a Pandas DataFrame.
+    
+    Args:
+        df: The Pandas DataFrame containing the data.
+        column: The name of the column for which to calculate the RSI.
+        period: The number of periods to use for the RSI calculation.
+    
+    Returns:
+        A Pandas Series containing the RSI values.
+    """
+    # Calculate the difference between the current and previous values
+    diff = df[column].diff()
+    
+    # Create two empty Pandas Series to store the gain and loss
+    gain = pd.Series(index=diff.index)
+    loss = pd.Series(index=diff.index)
+    
+    # Fill the gain and loss Series with the appropriate values
+    gain[diff > 0] = diff[diff > 0]
+    loss[diff < 0] = -diff[diff < 0]
+    
+    # Calculate the rolling average of the gain and loss
+    avg_gain = gain.ewm(com=period - 1, min_periods=period).mean()
+    avg_loss = loss.ewm(com=period - 1, min_periods=period).mean()
+    
+    # Calculate the relative strength
+    rs = avg_gain / avg_loss
+    
+    # Calculate the RSI
+    rsi = 100 - (100 / (1 + rs))
+    
+    return rsi
+
+def calc_macd(df: pd.DataFrame, column: str, fast_period: int, slow_period: int, signal_period: int) -> pd.DataFrame:
+    """Calculate the moving average convergence divergence (MACD) for a column in a Pandas DataFrame.
+
+    Args:
+        df: The Pandas DataFrame containing the data.
+        column: The name of the column for which to calculate the MACD.
+        fast_period: The number of periods to use for the fast moving average.
+        slow_period: The number of periods to use for the slow moving average.
+        signal_period: The number of periods to use for the signal line.
+
+    Returns:
+        A Pandas DataFrame containing the MACD, MACD signal, and MACD histogram values.
+    """
+    # Calculate the fast and slow moving averages
+    fast_ma = df[column].ewm(com=fast_period - 1, min_periods=fast_period).mean()
+    slow_ma = df[column].ewm(com=slow_period - 1, min_periods=slow_period).mean()
+
+    # Calculate the MACD
+    macd = fast_ma - slow_ma
+
+    # Calculate the MACD signal
+    macd_signal = macd.ewm(com=signal_period - 1, min_periods=signal_period).mean()
+
+    # Calculate the MACD histogram
+    macd_hist = macd - macd_signal
+
+    # Create a Pandas DataFrame to store the MACD, MACD signal, and MACD histogram values
+    macd_df = pd.DataFrame({'MACD': macd, 'MACD signal': macd_signal, 'MACD histogram': macd_hist})
+
+    return macd_df
+
+
 # Sidebar controls -----------------------------------------------------------
 
 # Create a sidebar for user input
@@ -139,71 +206,6 @@ for index, row in data.iterrows():
 
 data = data.drop(columns=['Dividends', 'Stock Splits'])
 
-    
-def calc_rsi(df: pd.DataFrame, column: str, period: int) -> pd.Series:
-    """Calculate the relative strength index (RSI) for a column in a Pandas DataFrame.
-    
-    Args:
-        df: The Pandas DataFrame containing the data.
-        column: The name of the column for which to calculate the RSI.
-        period: The number of periods to use for the RSI calculation.
-    
-    Returns:
-        A Pandas Series containing the RSI values.
-    """
-    # Calculate the difference between the current and previous values
-    diff = df[column].diff()
-    
-    # Create two empty Pandas Series to store the gain and loss
-    gain = pd.Series(index=diff.index)
-    loss = pd.Series(index=diff.index)
-    
-    # Fill the gain and loss Series with the appropriate values
-    gain[diff > 0] = diff[diff > 0]
-    loss[diff < 0] = -diff[diff < 0]
-    
-    # Calculate the rolling average of the gain and loss
-    avg_gain = gain.ewm(com=period - 1, min_periods=period).mean()
-    avg_loss = loss.ewm(com=period - 1, min_periods=period).mean()
-    
-    # Calculate the relative strength
-    rs = avg_gain / avg_loss
-    
-    # Calculate the RSI
-    rsi = 100 - (100 / (1 + rs))
-    
-    return rsi
-
-def calc_macd(df: pd.DataFrame, column: str, fast_period: int, slow_period: int, signal_period: int) -> pd.DataFrame:
-    """Calculate the moving average convergence divergence (MACD) for a column in a Pandas DataFrame.
-
-    Args:
-        df: The Pandas DataFrame containing the data.
-        column: The name of the column for which to calculate the MACD.
-        fast_period: The number of periods to use for the fast moving average.
-        slow_period: The number of periods to use for the slow moving average.
-        signal_period: The number of periods to use for the signal line.
-
-    Returns:
-        A Pandas DataFrame containing the MACD, MACD signal, and MACD histogram values.
-    """
-    # Calculate the fast and slow moving averages
-    fast_ma = df[column].ewm(com=fast_period - 1, min_periods=fast_period).mean()
-    slow_ma = df[column].ewm(com=slow_period - 1, min_periods=slow_period).mean()
-
-    # Calculate the MACD
-    macd = fast_ma - slow_ma
-
-    # Calculate the MACD signal
-    macd_signal = macd.ewm(com=signal_period - 1, min_periods=signal_period).mean()
-
-    # Calculate the MACD histogram
-    macd_hist = macd - macd_signal
-
-    # Create a Pandas DataFrame to store the MACD, MACD signal, and MACD histogram values
-    macd_df = pd.DataFrame({'MACD': macd, 'MACD signal': macd_signal, 'MACD histogram': macd_hist})
-
-    return macd_df
 
 
 
