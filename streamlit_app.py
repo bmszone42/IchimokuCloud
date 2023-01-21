@@ -1,6 +1,4 @@
 import streamlit as st
-st.set_page_config(page_icon = ":rocket:", layout = "wide")
-
 import pandas as pd
 import matplotlib.pyplot as plt
 import yfinance as yf
@@ -13,7 +11,8 @@ import matplotlib.gridspec as gridspec
 import numpy as np
 import os
 
- 
+st.set_page_config(page_icon=":rocket:", layout="wide")
+
 # Sidebar controls -----------------------------------------------------------
 
 # Create a sidebar for user input
@@ -21,8 +20,7 @@ st.sidebar.header("Inputs")
 
 # Add a text input for the symbol
 ticker_label = st.sidebar.text_input(
-    label='Stock ticker',
-    value='SPY',    
+    label="Stock ticker", value="SPY"
 )
 
 # Add a text input for the interval
@@ -32,39 +30,43 @@ interval = st.sidebar.text_input("Interval", "1m")
 period = st.sidebar.text_input("Period", "1d")
 
 # Select call or put
-option = st.sidebar.radio("Select Option Type: ", ('Call', 'Put'))
+option = st.sidebar.radio("Select Option Type: ", ("Call", "Put"))
 
-if option == 'Call':
-    option_type = 'C'
+if option == "Call":
+    option_type = "C"
 else:
-    option_type = 'P'
+    option_type = "P"
 
 # Add a slider input for the strike price
-strike = st.sidebar.slider("Select the option strike", 300,450,396)
+strike = st.sidebar.slider("Select the option strike", 300, 450, 396)
 
-# Add a  input for the option date
+# Add a input for the option date
 option_date = st.sidebar.date_input("Enter the strike date")
 d = option_date.strftime("%y%m%d")
 
 # Concatenate the option label
-options = str(ticker_label+d+option_type+'00'+str(strike)+'000')
-st.write('The option is ' + options)
-st.sidebar.subheader('The option is ' + options)
+options = str(ticker_label + d + option_type + "00" + str(strike) + "000")
+st.write("The option is " + options)
+st.sidebar.subheader("The option is " + options)
 
-result = st.sidebar.button('Get some data!')
+result = st.sidebar.button("Get some data!")
 if result:
     ticker = yf.Ticker(options)
     data = ticker.history(period=period, interval=interval)
 
-#@st.cache
-st.title('Ichimoku Cloud Indicator')
-st.markdown("Interval: **{}**, Period: **{}**, Symbol: **{}**".format(interval, period, options))
+# @st.cache
+st.title("Ichimoku Cloud Indicator")
+st.markdown(
+    "Interval: **{}**, Period: **{}**, Symbol: **{}**".format(
+        interval, period, options
+    )
+)
 
 # Convert the index to a column and keep only the hour and minute
-data['time'] = pd.to_datetime(data.index, format='%H:%M')
+data["time"] = pd.to_datetime(data.index, format="%H:%M")
 
 # Set the 'time' column as the new index
-data.set_index('time', inplace=True)
+data.set_index("time", inplace=True)
 
 # Calculate the Ichimoku Cloud indicator using the data
 data["tenkan_sen"] = data["High"].rolling(window=9).mean()
@@ -125,38 +127,38 @@ def calc_rsi(df: pd.DataFrame, column: str, period: int) -> pd.Series:
 
 def calc_macd(df: pd.DataFrame, column: str, fast_period: int, slow_period: int, signal_period: int) -> pd.DataFrame:
     """Calculate the moving average convergence divergence (MACD) for a column in a Pandas DataFrame.
-    
+
     Args:
         df: The Pandas DataFrame containing the data.
         column: The name of the column for which to calculate the MACD.
         fast_period: The number of periods to use for the fast moving average.
         slow_period: The number of periods to use for the slow moving average.
         signal_period: The number of periods to use for the signal line.
-    
+
     Returns:
         A Pandas DataFrame containing the MACD, MACD signal, and MACD histogram values.
     """
     # Calculate the fast and slow moving averages
     fast_ma = df[column].ewm(com=fast_period - 1, min_periods=fast_period).mean()
     slow_ma = df[column].ewm(com=slow_period - 1, min_periods=slow_period).mean()
-    
+
     # Calculate the MACD
     macd = fast_ma - slow_ma
-    
+
     # Calculate the MACD signal
     macd_signal = macd.ewm(com=signal_period - 1, min_periods=signal_period).mean()
-    
+
     # Calculate the MACD histogram
     macd_hist = macd - macd_signal
-    
+
     # Create a Pandas DataFrame to store the MACD, MACD signal, and MACD histogram values
     macd_df = pd.DataFrame({'MACD': macd, 'MACD signal': macd_signal, 'MACD histogram': macd_hist})
-    
+
     return macd_df
 
 
 fig = plt.figure(figsize=(12, 18), dpi=200)
-#fig.autofmt_xdate()
+# fig.autofmt_xdate()
 
 gs = gridspec.GridSpec(nrows=4, ncols=1, height_ratios=[3, 1, 1, 1])
 
@@ -173,13 +175,18 @@ fig.subplots_adjust(hspace=.5)
 
 ax1.fill_between(data.index, data['senkou_span_a'], data['senkou_span_b'], where=data['senkou_span_a'] >= data['senkou_span_b'], facecolor='green', alpha=0.25, interpolate=True)  # green fill for bullish trend 
 ax1.fill_between(data.index, data['senkou_span_a'], data['senkou_span_b'], where=data['senkou_span_a'] < data['senkou_span_b'], facecolor='red', alpha=0.25, interpolate=True)  # red fill for bearish trend 
+
 ax1.set_xlabel('Time')
 ax1.set_ylabel('Price')
-ax1.xaxis.set_major_locator(MinuteLocator (interval=30))
+ax1.xaxis.set_major_locator(MinuteLocator(interval=30))
 ax1.set_xlim(data.index.min(), data.index.max())
 
 # displaying the title on main subplot
-ax1.set_title('Ichimoku Cloud Indicator: Interval: {}, Period: {}, Symbol: {}'.format(interval, period, options))
+ax1.set_title(
+    'Ichimoku Cloud Indicator: Interval: {}, Period: {}, Symbol: {}'.format(
+        interval, period, options
+    )
+)
 
 # Get the tick labels
 tick_labels1 = ax1.get_xticklabels()
@@ -191,16 +198,27 @@ for label in tick_labels1:
     label.set_rotation(45)
     label.set_horizontalalignment('right')
 
-ax1.plot(data.index, data["Close"], label="Close", color='dimgrey', linewidth=1)
-ax1.plot(data["tenkan_sen"], label="tenkan_sen" , color='blue', linewidth=0.75)
-ax1.plot(data["kijun_sen"], label="kijun_sen" , color='saddlebrown', linewidth=0.75)
-ax1.plot(data["senkou_span_a"], label="senkou_span_a" , color='limegreen', linewidth=0.75)
-ax1.plot(data["senkou_span_b"], label="senkou_span_b" , color='red', linewidth=0.75)
-ax1.plot(data["chikou_span"], label="chikou_span" , color='magenta', linewidth=0.75)
+ax1.plot(
+    data.index, data["Close"], label="Close", color='dimgrey', linewidth=1
+)
+ax1.plot(
+    data["tenkan_sen"], label="tenkan_sen", color='blue', linewidth=0.75
+)
+ax1.plot(
+    data["kijun_sen"], label="kijun_sen", color='saddlebrown', linewidth=0.75
+)
+ax1.plot(
+    data["senkou_span_a"], label="senkou_span_a", color='limegreen', linewidth=0.75
+)
+ax1.plot(
+    data["senkou_span_b"], label="senkou_span_b", color='red', linewidth=0.75
+)
+ax1.plot(
+    data["chikou_span"], label="chikou_span", color='magenta', linewidth=0.75
+)
 ax1.scatter(long_positions, data.loc[long_positions]["Close"], label="Buy", color='green')
-ax1.scatter(short_positions, data.loc[short_positions]["Close"], label="Sell" , color='red')
+ax1.scatter(short_positions, data.loc[short_positions]["Close"], label="Sell", color='red')
 ax1.legend(fontsize=8, loc='upper left')
-
 
 # Calculate the RSI of the 'Close' column of a Pandas DataFrame 'df'
 rsi = calc_rsi(data, 'Close', 14)
@@ -213,7 +231,7 @@ ax2.set_ylim(10, 90)
 ax2.set_xlim(data.index.min(), data.index.max())
 
 ax2.set_xlabel('Time')
-ax2.xaxis.set_major_locator(MinuteLocator (interval=30))
+ax2.xaxis.set_major_locator(MinuteLocator(interval=30))
 
 # Add a horizontal line at y=30 for Oversold
 ax2.axhline(y=30, color='g')
@@ -226,7 +244,6 @@ ax2.axhline(y=70, color='r')
 
 # Reference X axis date using mdates.date2num since x-axis are dates 
 ax2.text(x=mdates.date2num(data.index[20]), y=80, s='OVERBOUGHT', horizontalalignment='center', verticalalignment='center_baseline', fontsize=8)
-
 
 # Get the tick labels
 tick_labels2 = ax2.get_xticklabels()
@@ -244,19 +261,19 @@ macd_df = calc_macd(data, 'Close', 12, 26, 9)
 # Plot the MACD and MACD histogram values
 ax3.plot(macd_df['MACD'], label='MACD', color='green')
 ax3.plot(macd_df['MACD signal'], label='MACD signal', color='red')
-bars = ax3.bar(macd_df.index, macd_df['MACD histogram'], label='MACD histogram', width=0.0015, color='r', align= 'edge', edgecolor='black', alpha=.5)
+bars = ax3.bar(macd_df.index, macd_df['MACD histogram'], label='MACD histogram', width=0.0015, color='r', align='edge', edgecolor='black', alpha=.5)
 threshold = .0001
 
-# # Set the color of each bar based on the threshold value
+# Set the color of each bar based on the threshold value
 for bar in bars:
     if bar.get_height() > threshold:
         bar.set_color('green')
-#     else:
-#         bar.set_color('red')
+    # else:
+    #     bar.set_color('red')
 
 ax3.set_xlabel('Time')
 ax3.set_ylabel('MACD')
-ax3.xaxis.set_major_locator(MinuteLocator (interval=30))
+ax3.xaxis.set_major_locator(MinuteLocator(interval=30))
 
 ax3.legend(fontsize=6, loc='upper left')
 
@@ -269,7 +286,7 @@ for label in tick_labels3:
     label.set_fontstyle("italic")
     label.set_rotation(45)
     label.set_horizontalalignment('right')
-    
+
 ax3.set_xlim(data.index.min(), data.index.max())
 
 # Plot the volume data on the new subplot
@@ -279,9 +296,9 @@ ax4.set_ylabel('Volume of Option')
 # Set the X axis limits to the minimum and maximum datetime values in the index
 ax4.set_xlim(data.index.min(), data.index.max())
 
-ax4.xaxis.set_major_locator(MinuteLocator (interval=30))
+ax4.xaxis.set_major_locator(MinuteLocator(interval=30))
 
-#ax4.legend(fontsize=6)
+# ax4.legend(fontsize=6)
 
 # Get the tick labels
 tick_labels4 = ax4.get_xticklabels()
@@ -293,20 +310,23 @@ for label in tick_labels4:
     label.set_rotation(45)
     label.set_horizontalalignment('right')
 
-
-# Create a boolean mask that indicates where the 'volume' values are greater than 1500
+# Create a boolean mask that indicates where the 'volume' values are greater than 1000
 mask = data['Volume'] > 1000
 
 # Shade the region of the subplot where the mask is True
 ax4.fill_between(data.index, data['Volume'], where=mask, alpha=0.25, color='purple')
-#plt.show()
+# plt.show()
+
+
+import streamlit as st
+import plotly.graph_objs as go
 
 st.pyplot(fig)
 
 def get_candlestick_chart(data):
-    
+
     fig5 = go.Figure()
-    
+
     fig5.add_trace(
         go.Candlestick(
             x=data.index,
@@ -317,28 +337,28 @@ def get_candlestick_chart(data):
             showlegend=False,
         )
     )
-    
-#     fig5.add_trace(
-#         go.Line(
-#             x=data.index,
-#             y=data['Close'],
-#         )    
-#     )
-    
+
+    #     fig5.add_trace(
+    #         go.Line(
+    #             x=data.index,
+    #             y=data['Close'],
+    #         )    
+    #     )
+
     fig5.update_xaxes(
         rangebreaks = [{'bounds': ['sat', 'mon']}],
         rangeslider_visible = False,
     )
-    
+
     fig5.update_layout(
         legend = {'x': 0, 'y': -0.05, 'orientation': 'h'},
         margin = {'l': 50, 'r': 50, 'b': 50, 't': 25},
         width = 800,
         height = 800,
     )
-    
+
     return fig5
-#st.write(data)   
+
 st.plotly_chart(get_candlestick_chart(data))
 
 st.write("Pricing Data from Option " + options)
