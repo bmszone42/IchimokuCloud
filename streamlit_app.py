@@ -356,7 +356,7 @@ if result:
     # plt.show()
     if savefigure:
         file_name = options + ".png"
-        st.empty()
+        #st.empty()
         file_path = st.file_uploader("Choose a location to save the file", type="png")
     if file_path:
         file_name = st.text_input("Use current filename?", file_name)
