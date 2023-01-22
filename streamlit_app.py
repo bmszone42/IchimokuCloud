@@ -365,12 +365,12 @@ if result:
 #         else:
 #             st.warning("No file path selected, figure not saved.")   
         with open(file_name, "rb") as file:
-        btn = st.download_button(
-            label="Download image",
-            data=file,
-            file_name=file_name,
-            mime="image/png"
-          )
+            btn = st.download_button(
+                label="Download image",
+                data=file,
+                file_name=file_name,
+                mime="image/png"
+              )
     st.pyplot(fig)
     if candlestick:
         st.plotly_chart(get_candlestick_chart(data))
