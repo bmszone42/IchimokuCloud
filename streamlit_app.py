@@ -356,6 +356,7 @@ if result:
     # plt.show()
     if savefigure:
         file_name = options + ".png"
+        plt.savefig(file_name)
 #         #file_path = st.file_uploader("Choose a location to save the file", type="png")
 #         #file_path = st.download_button("Choose a location to save the file", type="png")
 #         if file_path:
@@ -367,7 +368,7 @@ if result:
         with open(file_name, "rb") as file:
             btn = st.download_button(
                 label="Download image",
-                data=file,
+                data=file.read(),
                 file_name=file_name,
                 mime="image/png"
               )
