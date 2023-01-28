@@ -28,13 +28,7 @@ def get_candlestick_chart(data):
         )
     )
 
-    #     fig5.add_trace(
-    #         go.Line(
-    #             x=data.index,
-    #             y=data['Close'],
-    #         )    
-    #     )
-
+   
     fig5.update_xaxes(
         rangebreaks = [{'bounds': ['sat', 'mon']}],
         rangeslider_visible = False,
@@ -141,7 +135,7 @@ else:
     option_type = "P"
 
 # Add a slider input for the strike price
-strike = st.sidebar.slider("Select the option strike", 300, 450, 396)
+strike = st.sidebar.slider("Select the option strike", 370, 430, 396)
 
 # Add a input for the option date
 option_date = st.sidebar.date_input("Enter the strike date")
