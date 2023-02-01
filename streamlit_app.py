@@ -135,7 +135,7 @@ else:
     option_type = "P"
 
 # Add a slider input for the strike price
-strike = st.sidebar.slider("Select the option strike", 380, 420, 396)
+strike = st.sidebar.slider("Select the option strike", 390, 430, 396)
 
 # Add a input for the option date
 option_date = st.sidebar.date_input("Enter the strike date")
